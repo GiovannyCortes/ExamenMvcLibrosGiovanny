@@ -1,0 +1,27 @@
+﻿@{
+    int numcarrito = 0;
+    if (Context.Session.GetObject<List<int>>("ITEMS") != null) {
+        numcarrito = Context.Session.GetObject<List<int>>("ITEMS").Count;
+    }
+}
+
+@if (Context.User.Identity.IsAuthenticated == false) {
+    <li class="nav-item">
+        <a asp-controller="User" asp-action="PerfilUsuario" class="nav-link">
+            Log In
+        </a>
+    </li>
+} else {
+    string imagen = Context.User.FindFirst("PHOTO").Value;
+    <li class="nav-item">
+        <a asp-controller="User" asp-action="PerfilUsuario" class="nav-link text-primary">
+            <img src="~/images/@(imagen)" style="border-radius: 25px; height: 25px;" />
+            Hola, @Context.User.Identity.Name
+        </a>
+    </li>
+}
+<li class="nav-item">
+    <a asp-controller="Libros" asp-action="GetItemsSession" class="nav-link text-warning">
+        Carrito: @numcarrito
+    </a>
+</li>

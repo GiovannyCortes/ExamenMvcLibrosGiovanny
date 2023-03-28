@@ -1,0 +1,42 @@
+﻿@model List<Libro>
+
+@{
+    ViewData["Title"] = "Carrito";
+}
+
+<h1>Carrito</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>IdLibro</th>
+            <th>Titulo</th>
+            <th>Autor</th>
+            <th>Editorial</th>
+            <th>Portada</th>
+            <th>Resumen</th>
+            <th>Precio</th>
+            <th>IdGenero</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.IdLibro</td>
+            <td>@item.Titulo</td>
+            <td>@item.Autor</td>
+            <td>@item.Editorial</td>
+            <td>
+                <img src="~/images/@(@item.Portada)" height="150"/>
+            </td>
+            <td>@item.Resumen</td>
+            <td>@item.Precio</td>
+            <td>@item.IdGenero</td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<a asp-controller="Libros" asp-action="ExecuteOrder" class="btn btn-success">
+    Confirmar Pedido
+</a>

@@ -1,0 +1,57 @@
+﻿@model List<Libro>
+
+@{
+    Genero genero = (Genero)ViewData["GENERO"];
+    ViewData["Title"] = genero + ": libros";
+    int registros = (int)ViewData["REGISTROS"];
+    int cnt = 1;
+}
+
+@for (int i = 0; i < registros; i += 3) {
+    <a class="btn btn-outline-primary" asp-controller="Libros" asp-action="LibrosPorGenero" asp-route-posicion="@i" asp-route-idgenero="@genero.IdGenero">
+        @(cnt++)
+    </a>
+}
+
+<h1 style="margin: auto; color: darkslategrey;">Libros del Género @genero.Nombre</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>IdLibro</th>
+            <th>Titulo</th>
+            <th>Autor</th>
+            <th>Editorial</th>
+            <th>Portada</th>
+            <th>Resumen</th>
+            <th>Precio</th>
+            <th>IdGenero</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Libro item in Model) {
+            <tr>
+                <td>@item.IdLibro</td>
+                <td>@item.Titulo</td>
+                <td>@item.Autor</td>
+                <td>@item.Editorial</td>
+                <td>
+                    <img src="~/images/@item.Portada" height="150px" />
+                </td>
+                <td>
+                    <textarea style="max-width: 200px;">
+                        @item.Resumen
+                    </textarea>
+                </td>
+                <td>@item.Precio</td>
+                <td>@item.IdGenero</td>
+            <td style="display: flex; flex-direction: column;">
+                <a asp-controller="Libros" asp-action="DetallesLibro" asp-route-idlibro="@item.IdLibro" class="btn btn-success">Detalles</a>
+                <a asp-action="AddItemSession" asp-route-idlibro="@item.IdLibro" class="btn btn-outline-warning">Añadir al Carrito</a>
+                <a asp-action="DeleteItemSession" asp-route-idlibro="@item.IdLibro" class="btn btn-outline-danger">Quitar del Carrito</a>
+            </td>
+            </tr>
+        }
+    </tbody>
+</table>

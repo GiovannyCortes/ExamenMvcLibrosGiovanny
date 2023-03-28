@@ -1,0 +1,52 @@
+﻿@model ExamenMvcLibrosGiovanny.Models.Libro
+
+@{
+    ViewData["Title"] = "DetallesLibro";
+}
+
+<h1 style="color: darkslategrey;">@Model.Titulo</h1>
+
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">IdLibro</dt>
+        <dd class = "col-sm-10">
+            @Model.IdLibro
+        </dd>
+
+        <dt class = "col-sm-2">Autor</dt>
+        <dd class = "col-sm-10">
+            @Model.Autor
+        </dd>
+
+        <dt class = "col-sm-2">Editorial</dt>
+        <dd class = "col-sm-10">
+            @Model.Editorial
+        </dd>
+
+        <dt class = "col-sm-2">Portada</dt>
+        <dd class = "col-sm-10">
+            <img src="~/images/@Model.Portada" height="250" />
+        </dd>
+
+        <dt class = "col-sm-2">Resumen</dt>
+        <dd class = "col-sm-10">
+            @Model.Resumen
+        </dd>
+
+        <dt class = "col-sm-2">Precio</dt>
+        <dd class = "col-sm-10">
+            @Model.Precio
+        </dd>
+
+        <dt class = "col-sm-2">IdGenero</dt>
+        <dd class = "col-sm-10">
+            @Model.IdGenero
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Libros" class="btn btn-secondary">Volver</a>
+    <a asp-action="AddItemSession" asp-route-idlibro="@Model.IdLibro" class="btn btn-outline-warning">Añadir al Carrito</a>
+    <a asp-action="DeleteItemSession" asp-route-idlibro="@Model.IdLibro" class="btn btn-outline-danger">Quitar del Carrito</a>
+</div>

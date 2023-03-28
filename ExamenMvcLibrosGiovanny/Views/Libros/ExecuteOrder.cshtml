@@ -1,0 +1,40 @@
+﻿@model List<VistaPedido>
+
+@{
+    ViewData["Title"] = "ExecuteOrder";
+}
+
+<h1>Pedidos del cliente: @Context.User.Identity.Name</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>IdVistaPedidos</th>
+            <th>IdUsuario</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Titulo</th>
+            <th>Precio</th>
+            <th>Portada</th>
+            <th>Fecha</th>
+            <th>PrecioFinal</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (VistaPedido item in Model) {
+        <tr>
+            <td>@item.IdVistaPedidos</td>
+            <td>@item.IdUsuario</td>
+            <td>@item.Nombre</td>
+            <td>@item.Apellidos</td>
+            <td>@item.Titulo</td>
+            <td>@item.Precio</td>
+            <td>
+                <img src="~/images/@(@item.Portada)" height="200" />
+            </td>
+            <td>@item.Fecha</td>
+            <td>@item.PrecioFinal</td>
+        </tr>
+}
+    </tbody>
+</table>
